@@ -6,14 +6,15 @@ import random
 
 
 class Sampler(object):
-	def __init__(self, n_dim, n_sample):
+	def __init__(self, n_dim, n_sample = 0):
 		"""
 		Sampler class
 		-------------
 		Arguments
 		---------
 		n_dim    --- The number of simentions we draw from
-		n_sample --- The number of points drawn
+		n_sample --- The number of points drawn, if not set we 
+					 defalt to n_dim
 
 		Functions
 		---------
@@ -32,10 +33,16 @@ class Sampler(object):
 
 		To set the range of each dimention, use setInterval
 		To get the points according to the algorithm use getPoints
+
+		Posible extenstions include a better method of picking
+		points within strata.
 		"""
 		self.n_dim = n_dim
 		self.intervals = [[0,1] for i in range(n_dim)]
-		self.n_sample = n_sample
+		if n_sample != 0:
+			self.n_sample = n_sample
+		else:
+			self.n_sample = n_dim
 
 	def __devider(self, dim):
 		points = [ 0 for i in range(self.n_sample) ]
